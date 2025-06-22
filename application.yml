@@ -1,0 +1,29 @@
+server:
+  port: 2333
+  address: 0.0.0.0
+lavalink:
+  server:
+    password: "youshallnotpass"
+    sources:
+      youtube: true
+      spotify:
+        clientId: "${SPOTIFY_CLIENT_ID}"
+        clientSecret: "${SPOTIFY_CLIENT_SECRET}"
+    filters:
+      volume: true
+      equalizer: true
+      karaoke: true
+    bufferDurationMs: 400
+    frameBufferDurationMs: 5000
+    trackStuckThresholdMs: 10000
+    opusEncoded: true
+metrics:
+  prometheus:
+    enabled: false
+    endpoint: /metrics
+sentry:
+  dsn: ""
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
