@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
+      - LAVALINK_HOST=lavalink
+      - LAVALINK_PASSWORD=${LAVALINK_PASSWORD}
+    depends_on:
+      - lavalink
+    networks:
+      - bot-network
+
+  lavalink:
+    image: ghcr.io/lavalink-devs/lavalink:4
+    volumes:
+      - ./application.yml:/opt/lavalink/application.yml
+    environment:
+      - LAVALINK_SERVER_PASSWORD=${LAVALINK_PASSWORD}
+    ports:
+      - "2333:2333"
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    driver: bridge
